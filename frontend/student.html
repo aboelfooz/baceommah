@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ملف الطالب</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #2c786c;
+      --primary-light: #57a895;
+      --primary-dark: #1a4d44;
+      --secondary-color: #ff9800;
+      --danger-color: #c62828;
+      --danger-dark: #a00000;
+      --light-bg: #f8f9fa;
+      --text-dark: #333;
+      --text-light: #666;
+      --border-color: #e0e0e0;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --radius: 12px;
+    }
+    
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%);
+      margin: 0;
+      padding: 20px;
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+    
+    .container {
+      background: white;
+      border-radius: var(--radius);
+      padding: 30px;
+      box-shadow: var(--shadow);
+      max-width: 1000px;
+      margin: auto;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    }
+    
+    h1, h2 {
+      color: var(--primary-color);
+      text-align: center;
+      position: relative;
+      margin-bottom: 25px;
+    }
+    
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-top: 15px;
+    }
+    
+    h2 {
+      font-size: 22px;
+      font-weight: 600;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--primary-light);
+      margin-top: 35px;
+    }
+    
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      right: 0;
+      width: 70px;
+      height: 2px;
+      background: var(--secondary-color);
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    table, th, td {
+      border: 1px solid var(--border-color);
+    }
+    
+    th {
+      background: linear-gradient(to right, var(--primary-color), var(--primary-light));
+      color: white;
+      padding: 14px 10px;
+      font-weight: 600;
+      font-size: 16px;
+    }
+    
+    td {
+      padding: 12px 10px;
+      text-align: center;
+      transition: background-color 0.2s;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    
+    tr:hover td {
+      background-color: #f0f7f5;
+    }
+    
+    .logout-btn {
+      display: block;
+      background: linear-gradient(to right, var(--danger-color), var(--danger-dark));
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 30px;
+      margin: 30px auto 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(198, 40, 40, 0.3);
+      width: 180px;
+    }
+    
+    .logout-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(198, 40, 40, 0.4);
+    }
+    
+    .student-info {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 20px;
+      background: linear-gradient(135deg, #f0f7f5 0%, #e8f2f0 100%);
+      border-radius: var(--radius);
+      position: relative;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    
+    .student-info::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+    
+    .student-info img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 4px solid white;
+      object-fit: cover;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .student-info img:hover {
+      transform: scale(1.05);
+    }
+    
+    .student-info h1 {
+      margin: 10px 0 5px;
+      color: var(--primary-dark);
+    }
+    
+    .student-info p {
+      margin: 8px 0;
+      font-size: 16px;
+      color: var(--text-light);
+    }
+    
+    .student-info p span {
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+    
+    .level-badge {
+      display: inline-block;
+      background: var(--secondary-color);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 14px;
+      margin-top: 5px;
+      font-weight: 600;
+    }
+    
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+      
+      .container {
+        padding: 20px 15px;
+      }
+      
+      table {
+        font-size: 14px;
+      }
+      
+      th, td {
+        padding: 10px 5px;
+      }
+      
+      .student-info img {
+        width: 100px;
+        height: 100px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="student-info">
+      <img id="studentImage" src="" alt="صورة الطالب">
+      <h1 id="studentName"></h1>
+      <p>الكود: <span id="studentCodeDisplay"></span></p>
+      <p>المستوى العام: <span id="studentLevel" class="level-badge"></span></p>
+    </div>
+
+    <h2>اختبارات الدروس</h2>
+    <table id="lessonTestsTable">
+      <tr><th>اسم الدرس</th><th>النتيجة</th><th>التاريخ</th></tr>
+    </table>
+
+    <h2>اختبارات التجويد</h2>
+    <table id="tajweedTestsTable">
+      <tr><th>اسم الاختبار</th><th>النتيجة</th><th>التاريخ</th></tr>
+    </table>
+
+    <h2>اختبارات الحفظ</h2>
+    <table id="memorizationTestsTable">
+      <tr><th>اسم الاختبار</th><th>النتيجة</th><th>التاريخ</th></tr>
+    </table>
+
+    <h2>الصفحات الشهرية</h2>
+    <table id="pagesTable">
+      <tr><th>الشهر</th><th>السنة</th><th>عدد الصفحات</th><th>الهدف</th><th>آخر تحديث</th></tr>
+    </table>
+
+    <button class="logout-btn" onclick="logout()">تسجيل الخروج</button>
+  </div>
+
+  <script>
+    window.onload = () => {
+      const studentData = localStorage.getItem("currentStudent");
+      if (!studentData) {
+        alert("⚠️ الرجاء تسجيل الدخول أولاً");
+        window.location.href = "index.html";
+        return;
+      }
+
+      const student = JSON.parse(studentData);
+
+      // عرض المعلومات الأساسية
+      document.getElementById("studentName").textContent = student.name;
+      document.getElementById("studentCodeDisplay").textContent = student.code;
+      document.getElementById("studentLevel").textContent = student.overallLevel || "غير محدد";
+      document.getElementById("studentImage").src = student.image || "default-avatar.png";
+
+      // تعبئة الجداول
+      fillTable("lessonTestsTable", student.lessonTests, "lessonName");
+      fillTable("tajweedTestsTable", student.tajweedTests, "testName");
+      fillTable("memorizationTestsTable", student.memorizationTests, "testName");
+
+      // الصفحات الشهرية
+      const pagesTable = document.getElementById("pagesTable");
+      student.monthlyPages.forEach(p => {
+        const row = `<tr>
+          <td>${p.month}</td>
+          <td>${p.year}</td>
+          <td>${p.pages}</td>
+          <td>${p.goal}</td>
+          <td>${p.lastUpdate || ""}</td>
+        </tr>`;
+        pagesTable.innerHTML += row;
+      });
+    };
+
+    function fillTable(tableId, tests, nameField) {
+      const table = document.getElementById(tableId);
+      tests.forEach(t => {
+        const row = `<tr>
+          <td>${t[nameField]}</td>
+          <td>${t.result}</td>
+          <td>${t.date}</td>
+        </tr>`;
+        table.innerHTML += row;
+      });
+    }
+
+    function logout() {
+      localStorage.removeItem("currentStudent");
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>
